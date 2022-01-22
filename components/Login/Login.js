@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "@/api/api";
 import { config } from "@/config/config";
 import cookie from "js-cookie";
+import LoginGoogle from "./LoginGoogle";
 
 
 
@@ -132,6 +133,7 @@ const Login = ()=>{
         <button type="submit" className="btn btn-primary btn-block">
           Log In
         </button>
+        <LoginGoogle/>
         <p className="push-register">
           <Link href="/register">
             <a>Forgot Password?</a>
