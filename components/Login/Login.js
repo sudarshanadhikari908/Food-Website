@@ -10,23 +10,25 @@ import { config } from "../../config/config";
 
 
 const Login = ()=>{
-    const router = useRouter();
-    const {
-        register,
-        handleSubmit,
-        reset,
-        getValues,
-        formState: { errors, isValid },
-      } = useForm({
-        mode: "onSubmit",
-        resolver: yupResolver(loginSchema),
-      });
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onSubmit",
+    resolver: yupResolver(loginSchema),
+  });
 
 
 
 
 
-const loginRequest = async (values) => {
+  const loginRequest = async (values) => {
+ 
+
     try {
       const response = await api.post(
         "api/v4/auth/login",
@@ -47,7 +49,7 @@ const loginRequest = async (values) => {
     }
   };
 
-const submitForm = () => {
+  const submitForm = () => {
     const values = getValues();
     console.log(isValid);
     if (isValid) {
@@ -56,14 +58,14 @@ const submitForm = () => {
 
       reset();
     }
-}
+  }
 
     
-return(
+  return(
     <div>
-         <form onSubmit={handleSubmit(submitForm)}>
-             <h3>Login</h3>
-         <div className="form-group">
+      <form onSubmit={handleSubmit(submitForm)}>
+        <h3>Login</h3>
+        <div className="form-group">
           <label>Email</label>
           <input
             type="email"
@@ -98,10 +100,10 @@ return(
         </p>
 
 
-        </form>
+      </form>
     </div>
 
-);
+  );
 };
   
 

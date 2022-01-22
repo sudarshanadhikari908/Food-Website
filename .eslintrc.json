@@ -3,6 +3,7 @@
   // "extends": ["next/babel"],
 
   "rules":{
-"no-unused-vars": "error"
+"no-unused-vars": "warn",
+"indent": ["warn",2]
   }
 }
