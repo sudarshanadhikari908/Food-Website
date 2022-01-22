@@ -1,4 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
-  // "extends": ["next/babel"]
+  "extends":["next", "next/core-web-vitals"],
+  // "extends": ["next/babel"],
+
+  "rules":{
+"no-unused-vars": "error"
+  }
 }

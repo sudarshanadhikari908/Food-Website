@@ -47,7 +47,7 @@ const loginRequest = async (values) => {
     }
   };
 
-const submitForm = (data) => {
+const submitForm = () => {
     const values = getValues();
     console.log(isValid);
     if (isValid) {

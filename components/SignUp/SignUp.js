@@ -9,6 +9,7 @@ import { config } from "../../config/config";
 
 
 const SignUp = () => {
+ 
   const router = useRouter();
   const {
     register,
@@ -44,7 +45,7 @@ const SignUp = () => {
     }
   };
 
-  const submitForm = (data) => {
+  const submitForm = () => {
     const values = getValues();
     console.log(isValid);
     if (isValid) {
