@@ -2,14 +2,22 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "../../schema/schema";
+import { loginSchema } from "@/schema/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../api/api";
-import { config } from "../../config/config";
+import api from "@/api/api";
+import { config } from "@/config/config";
+import cookie from "js-cookie";
 
 
 
 const Login = ()=>{
+
+  let tokenKey;
+
+
+ 
+  
+
   const router = useRouter();
   const {
     register,
@@ -18,7 +26,7 @@ const Login = ()=>{
     getValues,
     formState: { errors, isValid },
   } = useForm({
-    mode: "onSubmit",
+    mode: "onChange",
     resolver: yupResolver(loginSchema),
   });
 
@@ -27,7 +35,6 @@ const Login = ()=>{
 
 
   const loginRequest = async (values) => {
- 
 
     try {
       const response = await api.post(
@@ -44,16 +51,35 @@ const Login = ()=>{
         config
       );
       if (response.status === 200) {
-        console.log(response.data);
+        console.log(response.data.access_token);
+        setSubmit(true);
+        tokenKey = response.data.access_token
+        cookie.set('token', tokenKey, { path: '/' });
+        cookie.set('username', username, { path: '/login' });
+        cookie.set('password', password, { path: '/' });
+        
         router.push("/");
       }
     } catch (e) {
-      console.log(e);
+
+      console.log(e.response.data.errors[0].message)
+  
+      const message = e.response.data.errors[0].message
+
+      if(message){
+          
+        console.log(message)
+      }else{
+        console.log("Bad Request")
+      }
     }
   };
 
   const submitForm = () => {
     const values = getValues();
+   
+   
+   
     console.log(isValid);
     if (isValid) {
       alert("Your form is submitted Successfully");
@@ -62,6 +88,9 @@ const Login = ()=>{
       reset();
     }
   }
+
+
+ 
 
     
   return(
@@ -93,14 +122,30 @@ const Login = ()=>{
           <p style={{ color: "red" }}> {errors.password?.message} </p>
         </div>
 
+        <div className="form-check">
+          <input className="form-check-input" type="checkbox" name="rememberme"  {...register("rememberme")}/>
+          <label className="form-check-label" >
+            Remember Me
+          </label>
+        </div>
+
         <button type="submit" className="btn btn-primary btn-block">
           Log In
         </button>
-        <p className="forgot-password text-right">
+        <p className="push-register">
+          <Link href="/register">
+            <a>Forgot Password?</a>
+          </Link>
+        </p>
+
+        <p className="push-register">
           <Link href="/register">
             <a>Donot Have an Account?</a>
           </Link>
         </p>
+
+      
+
 
 
       </form>

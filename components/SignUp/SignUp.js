@@ -3,9 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { registerSchema } from "../../schema/schema";
-import api from "../../api/api";
-import { config } from "../../config/config";
+import { registerSchema } from "@/schema/schema";
+import api from "@/api/api";
+import { config } from "@/config/config";
 
 
 const SignUp = () => {
@@ -40,7 +40,7 @@ const SignUp = () => {
    
       if (response.status === 201) {
         console.log(response.data);
-        router.push("/");
+        router.push("/login");
       }
     } catch (e) {
 
