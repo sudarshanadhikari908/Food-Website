@@ -33,8 +33,11 @@ const Login = ()=>{
       const response = await api.post(
         "api/v4/auth/login",
         {
+          client_id: 2,
+          client_secret: "ZkPYPKRiUsEzVke7Q5sq21DrVvYmNK5w5bZKGzQo",
+          grant_type: "password",
          
-          email: values.email,
+          username: values.username,
           password: values.password,
          
         },
@@ -66,15 +69,15 @@ const Login = ()=>{
       <form onSubmit={handleSubmit(submitForm)}>
         <h3>Login</h3>
         <div className="form-group">
-          <label>Email</label>
+          <label>Username</label>
           <input
-            type="email"
-            name="email"
+            type="text"
+            name="username"
             className="form-control"
-            {...register("email")}
+            {...register("username")}
             placeholder="Enter Username"
           />
-          <p style={{ color: "red" }}> {errors.email?.message} </p>
+          <p style={{ color: "red" }}> {errors.username?.message} </p>
         </div>
 
         <div className="form-group">

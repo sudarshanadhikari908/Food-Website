@@ -23,6 +23,7 @@ const SignUp = () => {
   });
 
   const signupRequest = async (values) => {
+    console.log("I am in signup request")
     try {
       const response = await api.post(
         "api/v4/auth/signup",
@@ -36,12 +37,25 @@ const SignUp = () => {
         },
         config
       );
-      if (response.status === 200) {
+   
+      if (response.status === 201) {
         console.log(response.data);
         router.push("/");
       }
     } catch (e) {
-      console.log(e);
+
+      const  [{message}]  = (e.response.data.errors)
+
+      if(message){
+          
+        console.log(message)
+      }else{
+        console.log("Bad Request")
+      }
+
+     
+   
+
     }
   };
 
