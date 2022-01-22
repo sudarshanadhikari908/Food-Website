@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../schema/schema";
-import url from "../../api/api";
+import api from "../../api/api";
 import { config } from "../../config/config";
 
 
@@ -23,13 +23,13 @@ const SignUp = () => {
 
   const signupRequest = async (values) => {
     try {
-      const response = await url.post(
+      const response = await api.post(
         "api/v4/auth/signup",
         {
           last_name: values.lname,
           email: values.email,
           password: values.password,
-          mobile_number: 9851236517,
+          mobile_number: parseInt(values.mobile_number),
           first_name: values.fname,
           username: values.username,
         },
@@ -113,7 +113,7 @@ const SignUp = () => {
             type="password"
             className="form-control"
             placeholder="Enter password"
-            name="mobile_number"
+            name="password"
             {...register("password")}
             name="password"
           />
@@ -145,7 +145,7 @@ const SignUp = () => {
         </div>
 
         <button type="submit" className="btn btn-primary btn-block">
-          Log In
+          Register
         </button>
         <p className="forgot-password text-right">
           <Link href="/login">
