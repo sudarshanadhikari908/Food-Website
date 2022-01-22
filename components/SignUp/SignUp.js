@@ -115,7 +115,7 @@ const SignUp = () => {
             placeholder="Enter password"
             name="password"
             {...register("password")}
-            name="password"
+            
           />
           <p style={{ color: "red" }}> {errors.password?.message} </p>
         </div>
