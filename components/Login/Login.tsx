@@ -8,16 +8,20 @@ import api from "@/api/api";
 import { config } from "@/config/config";
 import cookie from "js-cookie";
 import LoginGoogle from "./LoginGoogle";
+import ILogin from '@/interface/login';
+
 
 
 
 const Login = ()=>{
 
-  let tokenKey;
-
-
  
-  
+
+  let tokenKey;
+  const preLoadedValues = {
+    username: cookie.get('username'),
+    password: cookie.get('password')
+  }
 
   const router = useRouter();
   const {
@@ -26,7 +30,8 @@ const Login = ()=>{
     reset,
     getValues,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<ILogin>({
+    defaultValues: preLoadedValues,
     mode: "onChange",
     resolver: yupResolver(loginSchema),
   });
@@ -35,7 +40,7 @@ const Login = ()=>{
 
 
 
-  const loginRequest = async (values) => {
+  const loginRequest = async (values:ILogin) => {
 
     try {
       const response = await api.post(
@@ -51,17 +56,24 @@ const Login = ()=>{
         },
         config
       );
+      console.log(response.status)
       if (response.status === 200) {
+   
+        
+        if (values.rememberme){
+          cookie.set('username', values.username, { path: '/login' })
+          cookie.set('password', values.password, { path: '/login' })
+        }
+
         console.log(response.data.access_token);
-        setSubmit(true);
+        
         tokenKey = response.data.access_token
         cookie.set('token', tokenKey, { path: '/' });
-        cookie.set('username', username, { path: '/login' });
-        cookie.set('password', password, { path: '/' });
-        
         router.push("/");
       }
-    } catch (e) {
+      console.log(values.rememberme)
+   
+    } catch (e:any) {
 
       console.log(e.response.data.errors[0].message)
   
@@ -95,16 +107,16 @@ const Login = ()=>{
 
     
   return(
-    <div>
-      <form onSubmit={handleSubmit(submitForm)}>
+    <div className="row h-100 justify-content-center align-items-center">
+      <form className=' justify-content-md-center col-md-5' onSubmit={handleSubmit(submitForm)}>
         <h3>Login</h3>
         <div className="form-group">
           <label>Username</label>
           <input
             type="text"
-            name="username"
             className="form-control"
             {...register("username")}
+            name="username"
             placeholder="Enter Username"
           />
           <p style={{ color: "red" }}> {errors.username?.message} </p>
@@ -116,15 +128,15 @@ const Login = ()=>{
             type="password"
             className="form-control"
             placeholder="Enter password"
-            name="password"
             {...register("password")}
+            name="password"
             
           />
           <p style={{ color: "red" }}> {errors.password?.message} </p>
         </div>
 
         <div className="form-check">
-          <input className="form-check-input" type="checkbox" name="rememberme"  {...register("rememberme")}/>
+          <input className="form-check-input" type="checkbox"   {...register("rememberme")} name="rememberme"/>
           <label className="form-check-label" >
             Remember Me
           </label>
@@ -133,9 +145,10 @@ const Login = ()=>{
         <button type="submit" className="btn btn-primary btn-block">
           Log In
         </button>
+        
         <LoginGoogle/>
         <p className="push-register">
-          <Link href="/register">
+          <Link href="/login/forgot-password">
             <a>Forgot Password?</a>
           </Link>
         </p>

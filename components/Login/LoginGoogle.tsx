@@ -8,11 +8,13 @@ function LoginGoogle() {
 
   const router = useRouter();
 
-  const onLoginSuccess = () => {
+  const onLoginSuccess = (res:any) => {
+    console.log(res)
     router.push('/')
   };
 
-  const onLoginFailure = () => {
+  const onLoginFailure = (res:any) => {
+    console.log(res)
     router.push('/login')
   };
 

@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "@/schema/schema";
 import api from "@/api/api";
 import { config } from "@/config/config";
+import ISignUp from '@/interface/signUp';
+
+
 
 
 const SignUp = () => {
@@ -17,12 +20,12 @@ const SignUp = () => {
     reset,
     getValues,
     formState: { errors, isValid },
-  } = useForm({
+  } = useForm<ISignUp>({
     mode: "onSubmit",
     resolver: yupResolver(registerSchema),
   });
 
-  const signupRequest = async (values) => {
+  const signupRequest = async (values:ISignUp) => {
     console.log("I am in signup request")
     try {
       const response = await api.post(
@@ -42,7 +45,7 @@ const SignUp = () => {
         console.log(response.data);
         router.push("/login");
       }
-    } catch (e) {
+    } catch (e:any) {
 
       const  [{message}]  = (e.response.data.errors)
 
@@ -61,6 +64,8 @@ const SignUp = () => {
 
   const submitForm = () => {
     const values = getValues();
+    console.log(values)
+    console.log(typeof values)
     console.log(isValid);
     if (isValid) {
       alert("Your form is submitted Successfully");
@@ -71,17 +76,17 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(submitForm)}>
+    <div className="row h-100 justify-content-center align-items-center">
+      <form className='col-md-5' onSubmit={handleSubmit(submitForm)}>
         <h3>Sign Up</h3>
 
         <div className="form-group">
           <label>First Name</label>
           <input
             type="text"
-            name="fname"
             className="form-control"
             {...register("fname")}
+            name="fname"
             placeholder="Enter your first Name"
           />
         </div>
@@ -102,10 +107,10 @@ const SignUp = () => {
           <label>Email</label>
           <input
             type="email"
-            name="email"
             className="form-control"
             {...register("email")}
-            placeholder="Enter Username"
+            placeholder="Enter Email"
+            name="email"
           />
           <p style={{ color: "red" }}> {errors.email?.message} </p>
         </div>
@@ -128,8 +133,8 @@ const SignUp = () => {
             type="password"
             className="form-control"
             placeholder="Enter password"
-            name="password"
             {...register("password")}
+            name="password"
             
           />
           <p style={{ color: "red" }}> {errors.password?.message} </p>
@@ -140,8 +145,8 @@ const SignUp = () => {
           <input
             type="password"
             className="form-control"
-            name="confirmpassword"
             {...register("confirmpassword")}
+            name="confirmpassword"
             placeholder="Enter password"
           />
           <p style={{ color: "red" }}> {errors.confirmpassword?.message} </p>

@@ -14,7 +14,14 @@ export const registerSchema = yup.object().shape({
 
 export const loginSchema = yup.object().shape({
  
-  username: yup.string().email("It is not a valid username").required("Please enter your email"),
+  username: yup.string().email("It is not a valid username").required("Please enter your username"),
   password: yup.string().required("Please enter your password").min(6),
+ 
+});
+
+export const forgetPasswordSchema = yup.object().shape({
+ 
+  email: yup.string().email("It is not a valid email").required("Please enter your email"),
+ 
  
 });
