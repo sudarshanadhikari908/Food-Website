@@ -6,6 +6,7 @@
 
   "rules":{
 "no-unused-vars": "warn",
+"sort-imports": "warn",
 "indent": ["warn",2]
   }
 }
