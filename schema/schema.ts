@@ -4,10 +4,10 @@ export const registerSchema = yup.object().shape({
   fname: yup.string().required("First Name required"),
   lname: yup.string().required("Last Name is required"),
   email: yup.string().email("Please enter a valid email address").required("Email is required"),
-  username: yup.string().required(),
+  username: yup.string().required("Username is required"),
 
   password: yup.string().min(4).required("Password is required"),
-  confirmpassword: yup.string().oneOf([yup.ref("password"), null]),
+  confirmpassword: yup.string().oneOf([yup.ref("password"), null],"Password didn't match"),
   mobile_number: yup.string().max(10).min(10).required("Mobile number is required"),
 });
 
