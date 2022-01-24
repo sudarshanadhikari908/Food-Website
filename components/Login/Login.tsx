@@ -9,6 +9,7 @@ import { config } from "@/config/config";
 import cookie from "js-cookie";
 import LoginGoogle from "./LoginGoogle";
 import ILogin from '@/interface/login';
+import { toast } from 'react-toastify';
 
 
 
@@ -69,6 +70,7 @@ const Login = ()=>{
         
         tokenKey = response.data.access_token
         cookie.set('token', tokenKey, { path: '/' });
+        toast.success("Login Successful")
         router.push("/");
       }
       console.log(values.rememberme)
@@ -82,8 +84,10 @@ const Login = ()=>{
       if(message){
           
         console.log(message)
+        toast.error(message)
       }else{
         console.log("Bad Request")
+        toast.error("Internal Server Error")
       }
     }
   };

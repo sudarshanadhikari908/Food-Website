@@ -7,6 +7,7 @@ import { registerSchema } from "@/schema/schema";
 import api from "@/api/api";
 import { config } from "@/config/config";
 import ISignUp from '@/interface/signUp';
+import { toast } from 'react-toastify';
 
 
 
@@ -44,6 +45,7 @@ const SignUp = () => {
       if (response.status === 201) {
         console.log(response.data);
         router.push("/login");
+        toast.success("Registration Successful")
       }
     } catch (e:any) {
 
@@ -52,8 +54,10 @@ const SignUp = () => {
       if(message){
           
         console.log(message)
+        toast.error(message)
       }else{
         console.log("Bad Request")
+        toast.error("Internal Server Error")
       }
 
      
