@@ -1,12 +1,9 @@
 {
-  "extends":["next", "next/core-web-vitals","eslint:recommended"],
-  // , "next/babel"
-  // "next/babel"
+  "extends": ["next", "next/core-web-vitals", "eslint:recommended"],
 
-
-  "rules":{
-"no-unused-vars": "warn",
-"no-duplicate-imports":"error",
-"indent": ["warn",2]
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-duplicate-imports": "error",
+    "no-console": 1
   }
 }

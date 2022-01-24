@@ -6,14 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "@/schema/schema";
 import api from "@/api/api";
 import { config } from "@/config/config";
-import ISignUp from '@/interface/signUp';
-import { toast } from 'react-toastify';
-
-
-
+import ISignUp from "@/interface/signUp";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
- 
   const router = useRouter();
   const {
     register,
@@ -26,8 +22,7 @@ const SignUp = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  const signupRequest = async (values:ISignUp) => {
-    console.log("I am in signup request")
+  const signupRequest = async (values: ISignUp) => {
     try {
       const response = await api.post(
         "api/v4/auth/signup",
@@ -41,36 +36,24 @@ const SignUp = () => {
         },
         config
       );
-   
+
       if (response.status === 201) {
-        console.log(response.data);
         router.push("/login");
-        toast.success("Registration Successful")
+        toast.success("Registration Successful");
       }
-    } catch (e:any) {
+    } catch (e: any) {
+      const [{ message }] = e.response.data.errors;
 
-      const  [{message}]  = (e.response.data.errors)
-
-      if(message){
-          
-        console.log(message)
-        toast.error(message)
-      }else{
-        console.log("Bad Request")
-        toast.error("Internal Server Error")
+      if (message) {
+        toast.error(message);
+      } else {
+        toast.error("Internal Server Error");
       }
-
-     
-   
-
     }
   };
 
   const submitForm = () => {
     const values = getValues();
-    console.log(values)
-    console.log(typeof values)
-    console.log(isValid);
     if (isValid) {
       alert("Your form is submitted Successfully");
       signupRequest(values);
@@ -81,7 +64,7 @@ const SignUp = () => {
 
   return (
     <div className="row h-100 justify-content-center align-items-center">
-      <form className='col-md-5' onSubmit={handleSubmit(submitForm)}>
+      <form className="col-md-5" onSubmit={handleSubmit(submitForm)}>
         <h3>Sign Up</h3>
 
         <div className="form-group">
@@ -139,7 +122,6 @@ const SignUp = () => {
             placeholder="Enter password"
             {...register("password")}
             name="password"
-            
           />
           <p style={{ color: "red" }}> {errors.password?.message} </p>
         </div>

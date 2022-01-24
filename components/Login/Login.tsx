@@ -8,21 +8,15 @@ import api from "@/api/api";
 import { config } from "@/config/config";
 import cookie from "js-cookie";
 import LoginGoogle from "./LoginGoogle";
-import ILogin from '@/interface/login';
-import { toast } from 'react-toastify';
+import ILogin from "@/interface/login";
+import { toast } from "react-toastify";
 
-
-
-
-const Login = ()=>{
-
- 
-
+const Login = () => {
   let tokenKey;
   const preLoadedValues = {
-    username: cookie.get('username'),
-    password: cookie.get('password')
-  }
+    username: cookie.get("username"),
+    password: cookie.get("password"),
+  };
 
   const router = useRouter();
   const {
@@ -37,12 +31,7 @@ const Login = ()=>{
     resolver: yupResolver(loginSchema),
   });
 
-
-
-
-
-  const loginRequest = async (values:ILogin) => {
-
+  const loginRequest = async (values: ILogin) => {
     try {
       const response = await api.post(
         "api/v4/auth/login",
@@ -50,69 +39,52 @@ const Login = ()=>{
           client_id: 2,
           client_secret: "ZkPYPKRiUsEzVke7Q5sq21DrVvYmNK5w5bZKGzQo",
           grant_type: "password",
-         
+
           username: values.username,
           password: values.password,
-         
         },
         config
       );
-      console.log(response.status)
+
       if (response.status === 200) {
-   
-        
-        if (values.rememberme){
-          cookie.set('username', values.username, { path: '/login' })
-          cookie.set('password', values.password, { path: '/login' })
+        if (values.rememberme) {
+          cookie.set("username", values.username, { path: "/login" });
+          cookie.set("password", values.password, { path: "/login" });
         }
 
-        console.log(response.data.access_token);
-        
-        tokenKey = response.data.access_token
-        cookie.set('token', tokenKey, { path: '/' });
-        toast.success("Login Successful")
+        tokenKey = response.data.access_token;
+        cookie.set("token", tokenKey, { path: "/" });
+        toast.success("Login Successful");
         router.push("/");
       }
-      console.log(values.rememberme)
-   
-    } catch (e:any) {
+    } catch (e: any) {
+      const message = e.response.data.errors[0].message;
 
-      console.log(e.response.data.errors[0].message)
-  
-      const message = e.response.data.errors[0].message
-
-      if(message){
-          
-        console.log(message)
-        toast.error(message)
-      }else{
-        console.log("Bad Request")
-        toast.error("Internal Server Error")
+      if (message) {
+        toast.error(message);
+      } else {
+        toast.error("Internal Server Error");
       }
     }
   };
 
   const submitForm = () => {
     const values = getValues();
-   
-   
-   
-    console.log(isValid);
+
     if (isValid) {
       alert("Your form is submitted Successfully");
       loginRequest(values);
 
       reset();
     }
-  }
+  };
 
-
- 
-
-    
-  return(
+  return (
     <div className="row h-100 justify-content-center align-items-center">
-      <form className=' justify-content-md-center col-md-5' onSubmit={handleSubmit(submitForm)}>
+      <form
+        className=" justify-content-md-center col-md-5"
+        onSubmit={handleSubmit(submitForm)}
+      >
         <h3>Login</h3>
         <div className="form-group">
           <label>Username</label>
@@ -134,23 +106,25 @@ const Login = ()=>{
             placeholder="Enter password"
             {...register("password")}
             name="password"
-            
           />
           <p style={{ color: "red" }}> {errors.password?.message} </p>
         </div>
 
         <div className="form-check">
-          <input className="form-check-input" type="checkbox"   {...register("rememberme")} name="rememberme"/>
-          <label className="form-check-label" >
-            Remember Me
-          </label>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            {...register("rememberme")}
+            name="rememberme"
+          />
+          <label className="form-check-label">Remember Me</label>
         </div>
 
         <button type="submit" className="btn btn-primary btn-block">
           Log In
         </button>
-        
-        <LoginGoogle/>
+
+        <LoginGoogle />
         <p className="push-register">
           <Link href="/login/forgot-password">
             <a>Forgot Password?</a>
@@ -162,17 +136,9 @@ const Login = ()=>{
             <a>Donot Have an Account?</a>
           </Link>
         </p>
-
-      
-
-
-
       </form>
     </div>
-
   );
 };
-  
-
 
 export default Login;

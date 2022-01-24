@@ -1,15 +1,14 @@
-import type { AppProps} from 'next/app'
+import type { AppProps } from "next/app";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return(
+  return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <Component {...pageProps} />
     </>
-    
   );
 }
 

@@ -1,7 +1,3 @@
 export default interface IForget {
-   
-    email: string;
-   
-  
-  }
-  
+  email: string;
+}

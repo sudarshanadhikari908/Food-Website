@@ -1,8 +1,5 @@
 export default interface ILogin {
-   
-    username: string;
-    password:string;
-    rememberme: boolean;
-  
-  }
-  
+  username: string;
+  password: string;
+  rememberme: boolean;
+}
