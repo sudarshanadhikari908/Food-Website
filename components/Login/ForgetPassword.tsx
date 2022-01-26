@@ -6,6 +6,7 @@ import api from "@/api/api";
 import { useRouter } from "next/router";
 import { forgetPasswordSchema } from "@/schema/schema";
 import IForget from "@/interface/forgetPassword";
+import { toast } from "react-toastify";
 
 function ForgetPassword() {
   const router = useRouter();
@@ -30,19 +31,16 @@ function ForgetPassword() {
         config
       );
 
-      console.log(response);
       if (response.status === 200) {
         router.push("/login/change-password");
       }
     } catch (e: any) {
-      console.log(e.response.data.errors[0].message);
-
       const message = e.response.data.errors[0].message;
 
       if (message) {
-        console.log(message);
+        toast.error(message);
       } else {
-        console.log("Bad Request");
+        toast.error("Bad request");
       }
     }
   };
@@ -50,7 +48,6 @@ function ForgetPassword() {
   const submitForm = () => {
     const values = getValues();
 
-    console.log(isValid);
     if (isValid) {
       alert("Your form is submitted Successfully");
       passwordChangeRequest(values);

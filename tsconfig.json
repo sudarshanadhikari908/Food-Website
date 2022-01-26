@@ -3,17 +3,13 @@
     "baseUrl": ".",
     "target": "es5",
     "paths": {
-        "@/components/*": ["components/*"],
-        "@/schema/*": ["schema/*"],
-        "@/api/*": ["api/*"],
-        "@/config/*": ["config/*"],
-        "@/interface/*": ["interface/*"]
+      "@/components/*": ["components/*"],
+      "@/schema/*": ["schema/*"],
+      "@/api/*": ["api/*"],
+      "@/config/*": ["config/*"],
+      "@/interface/*": ["interface/*"]
     },
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -31,9 +27,9 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "hooks/ProductListData.js",
+    "helpers/AllProducts.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

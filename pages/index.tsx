@@ -1,4 +1,5 @@
 import HomePage from "@/components/Home/HomePage";
+
 function Home() {
   return (
     <div className="container">
