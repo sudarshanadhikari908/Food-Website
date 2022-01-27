@@ -1,7 +1,7 @@
 import React from "react";
 import useHomeStore from "../../../zustandStore/homeStore";
 import Link from "next/link";
-
+import Image from "next/image";
 function Category() {
   const data = useHomeStore((state) => state.homeData);
 
@@ -21,10 +21,12 @@ function Category() {
                 className=" p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5"
               >
                 <div className="rounded overflow-hidden shadow-lg ">
-                  <img
+                  <Image
                     className="w-full"
                     src={cat.backgroundImage}
                     alt={cat.title}
+                    width="300"
+                    height="300"
                   />
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{cat.title}</div>

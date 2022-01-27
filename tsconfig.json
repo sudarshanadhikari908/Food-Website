@@ -32,7 +32,9 @@
     "**/*.ts",
     "**/*.tsx",
     "hooks/ProductListData.js",
-    "helpers/AllProducts.ts"
+    "fetcher/AllProducts.ts",
+    "fetcher/CategoryList.js",
+    "fetcher/CategoryList.js"
   ],
   "exclude": ["node_modules"]
 }
