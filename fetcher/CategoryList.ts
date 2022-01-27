@@ -1,6 +1,6 @@
 import api from "@/api/api";
 import { homeConfig } from "@/config/config";
-export const fetchByCategory = async (slug: Array<string | number>) => {
+export const fetchByCategory = async (slug: [string, number]) => {
   try {
     const response = await api.get(`api/v4/category/${slug}`, homeConfig);
 
