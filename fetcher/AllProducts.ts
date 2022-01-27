@@ -1,6 +1,6 @@
 import { homeConfig } from "../config/config";
-import api from "../api/api";
-import IHomeheader from "@/interface/homeHeader";
+import api from "@/api/api";
+
 import { AxiosRequestHeaders } from "axios";
 
 export const fetchProducts = async () => {
@@ -12,6 +12,6 @@ export const fetchProducts = async () => {
 
     return response;
   } catch (e: any) {
-    return Promise.reject(new Error(e.response.data.message));
+    return Promise.reject(new Error(e.response.data.errors[0].message));
   }
 };

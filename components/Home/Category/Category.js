@@ -1,15 +1,11 @@
 import React from "react";
 import useHomeStore from "../../../zustandStore/homeStore";
 import Link from "next/link";
-import { useCategoryStore } from "../../../zustandStore/categoryStore";
+
 function Category() {
   const data = useHomeStore((state) => state.homeData);
-  const addData = useCategoryStore((state) => state.addData);
 
   const category = data?.data[1].categories;
-  if (category) {
-    addData(category);
-  }
 
   return (
     <>
@@ -28,7 +24,7 @@ function Category() {
                   <img
                     className="w-full"
                     src={cat.backgroundImage}
-                    alt="Mountain"
+                    alt={cat.title}
                   />
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{cat.title}</div>

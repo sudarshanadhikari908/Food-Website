@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 const NavBar = () => {
   const router = useRouter();
   return (
@@ -58,62 +58,22 @@ const NavBar = () => {
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Home
-                </a>
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Pizza
-                </a>
+                <Link href="/">
+                  <a style={{ color: "white" }}> Home</a>
+                </Link>
 
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Momo
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Noodles
-                </a>
-
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Chilli
-                </a>
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Sandwich
-                </a>
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Healthy Choice
-                </a>
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Rice
-                </a>
+                <Link href="/">
+                  <a style={{ color: "white" }}> Pizza</a>
+                </Link>
+                <Link href="">
+                  <a style={{ color: "white" }}> Noodles</a>
+                </Link>
+                <Link href="">
+                  <a style={{ color: "white" }}> Sandwich</a>
+                </Link>
+                <Link href="">
+                  <a style={{ color: "white" }}> Healthy Choice</a>
+                </Link>
               </div>
             </div>
           </div>

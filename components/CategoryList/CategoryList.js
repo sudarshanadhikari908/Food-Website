@@ -1,27 +1,24 @@
 import React from "react";
-import { useCategoryStore } from "../../zustandStore/categoryStore";
+
 import { useRouter } from "next/router";
+import CategoryListData from "@/hooks/CategoryListData";
 
 function CategoryList() {
   const router = useRouter();
-  const slug = router.query.slug;
+  const onSuccess = ({ data }) => {
+    console.log(data);
+  };
 
-  const { data } = useCategoryStore((state) => state.categoryData);
-  console.log(data);
-  // const result = data?.map((d) =>
-  //   d?.slug.filter((a) => {
-  //     if (a === slug[0]) {
-  //       return a;
-  //     }
-  //   })
-  // );
-  // console.log(result);
-
-  // const hello = data.map((d) => {
-  //   if (d.slug === slug) {
-  //     return d.id;
-  //   }
-  // });
+  const onError = (error) => {
+    console.log(error);
+  };
+  const { slug } = router.query;
+  console.log(slug);
+  const { isLoading, data, error, isFetching } = CategoryListData(
+    onSuccess,
+    onError,
+    slug
+  );
 
   return <div></div>;
 }
