@@ -1,7 +1,11 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
+import { useCartStore } from "@/zustandStore/cartStore";
 const NavBar = () => {
   const router = useRouter();
+  const cartData = useCartStore((state) => state.cartData);
+
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -50,10 +54,12 @@ const NavBar = () => {
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0 flex items-center">
-              <img
+              <Image
                 className="hidden lg:block h-10 w-auto"
                 src="https://uat.ordering-boafresh.ekbana.net/storage/blog/thumb/612f8ffe54663.png"
                 alt="BoaFresh"
+                width="50"
+                height="50"
               />
             </div>
             <div className="hidden sm:block sm:ml-6">
@@ -84,6 +90,9 @@ const NavBar = () => {
               className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login
+            </button>
+            <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Cart
             </button>
             <div className="ml-3 relative"></div>
           </div>

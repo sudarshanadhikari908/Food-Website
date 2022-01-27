@@ -1,13 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import CategoryListData from "@/hooks/CategoryListData";
 import Loader from "@/utils/Loader/Loader";
 import { toast } from "react-toastify";
+import { useCartStore } from "@/zustandStore/cartStore";
 import Image from "next/image";
 
 function CategoryList() {
   const router = useRouter();
+  const addData = useCartStore((state) => state.addData);
 
   const onError = (error) => {
     toast.error(error.message);
@@ -36,15 +37,18 @@ function CategoryList() {
                 <Image
                   className="w-full"
                   src={cat.icon}
-                  alt={cat.title}
+                  alt={cat.backgroundImage}
                   width="250"
                   height="250"
                 />
                 <div className="px-6 py-4">
                   <div className="font-bold text-xl mb-2">{cat.title}</div>
-                  <Link href={`/category/${cat.slug}`}>
-                    <a>Shop Now</a>
-                  </Link>
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => addData(cat)}
+                  >
+                    Add To Cart
+                  </button>
                 </div>
               </div>
             </div>
