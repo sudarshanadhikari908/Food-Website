@@ -12,7 +12,7 @@ function LoginGoogle() {
     router.push("/");
   };
 
-  const onLoginFailure = (res: any) => {
+  const onLoginFailure = () => {
     router.push("/login");
   };
 
