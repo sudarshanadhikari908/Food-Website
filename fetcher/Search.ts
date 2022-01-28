@@ -1,8 +1,11 @@
 import api from "@/api/api";
 import { homeConfig } from "@/config/config";
-export const fetchByCategory = async (slug: [string, number]) => {
+export const fetchSearchResult = async (type: string, keyword: string) => {
   try {
-    const { data } = await api.get(`api/v4/category/${slug}`, homeConfig);
+    const { data } = await api.get(
+      `api/v4/${type}?query=${keyword}`,
+      homeConfig
+    );
 
     return data;
   } catch (e: any) {

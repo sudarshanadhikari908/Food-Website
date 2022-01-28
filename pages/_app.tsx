@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import { SSRProvider } from "@react-aria/ssr";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -13,12 +14,14 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Navbar />
-        <ToastContainer />
-        <Component {...pageProps} />
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </QueryClientProvider>
+      <SSRProvider>
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
+          <ToastContainer />
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
+      </SSRProvider>
     </>
   );
 }
