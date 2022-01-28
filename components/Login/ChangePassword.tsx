@@ -1,17 +1,13 @@
-import React from 'react';
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { config } from "@/config/config";
+
 import api from "@/api/api";
-import { useRouter } from "next/router";
 import { forgetPasswordSchema } from "@/schema/schema";
-import IChangePassword from '@/interface/changePassword';
-
-
-
+import IChangePassword from "@/interface/changePassword";
+import { toast } from "react-toastify";
 
 function ChangePassword() {
-
   const {
     register,
     handleSubmit,
@@ -23,37 +19,31 @@ function ChangePassword() {
     resolver: yupResolver(forgetPasswordSchema),
   });
 
-  const passwordChangeRequest =async (values:IChangePassword)=>{
+  const passwordChangeRequest = async (values: IChangePassword) => {
     try {
-      const response = await api.post(
-        '/api/v4/profile/change-password',
-        // {
-        //   old-password : values.oldpassword,
-        //   new-password : values.newpassword,
-        //   confirm-password : values.confirmpassword
-        // },
-     
-      );
-    }catch(e){
-      console.log("Hellos")
-    }}
-
-
+      const response = await api.post("/api/v4/profile/change-password");
+    } catch (e: any) {
+      toast.error(e);
+    }
+  };
 
   const submitForm = () => {
     const values = getValues();
-    console.log(isValid);
+
     if (isValid) {
       alert("Your form is submitted Successfully");
       passwordChangeRequest(values);
 
       reset();
     }
-  }
+  };
 
-  return(  
+  return (
     <div className="row h-100 justify-content-center align-items-center">
-      <form className=' justify-content-md-center col-md-5' onSubmit={handleSubmit(submitForm)}>
+      <form
+        className=" justify-content-md-center col-md-5"
+        onSubmit={handleSubmit(submitForm)}
+      >
         <div className="form-group">
           <label>Old Password</label>
           <input
@@ -62,7 +52,6 @@ function ChangePassword() {
             placeholder="Enter old password"
             {...register("oldpassword")}
             name="oldpassword"
-            
           />
           <p style={{ color: "red" }}> {errors.oldpassword?.message} </p>
         </div>
@@ -75,7 +64,6 @@ function ChangePassword() {
             placeholder="Enter new password"
             {...register("newpassword")}
             name="newpassword"
-            
           />
           <p style={{ color: "red" }}> {errors.newpassword?.message} </p>
         </div>
@@ -88,7 +76,6 @@ function ChangePassword() {
             placeholder="Confirms password"
             {...register("confirmpassword")}
             name="confirmpassword"
-            
           />
           <p style={{ color: "red" }}> {errors.confirmpassword?.message} </p>
         </div>
