@@ -1,6 +1,7 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
+// Store to display data in home page
 const store = (set) => ({
   homeData: {},
   addData: (data) =>

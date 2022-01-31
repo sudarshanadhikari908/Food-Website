@@ -1,5 +1,6 @@
 import * as yup from "yup";
 
+// Validation for user registration
 export const registerSchema = yup.object().shape({
   fname: yup.string().required("First Name required"),
   lname: yup.string().required("Last Name is required"),
@@ -20,6 +21,8 @@ export const registerSchema = yup.object().shape({
     .required("Mobile number is required"),
 });
 
+// Validation while user tries to log in into the system
+
 export const loginSchema = yup.object().shape({
   username: yup
     .string()
@@ -27,6 +30,8 @@ export const loginSchema = yup.object().shape({
     .required("Please enter your username"),
   password: yup.string().required("Please enter your password").min(6),
 });
+
+// Validation if user forgets password
 
 export const forgetPasswordSchema = yup.object().shape({
   email: yup

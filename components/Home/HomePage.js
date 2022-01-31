@@ -11,6 +11,7 @@ import useHomeStore from "@/zustandStore/homeStore";
 function HomePage() {
   const addData = useHomeStore((state) => state.addData);
 
+  // onSuccess function stores data in zustand store
   const onSuccess = ({ data }) => {
     addData(data?.data);
   };

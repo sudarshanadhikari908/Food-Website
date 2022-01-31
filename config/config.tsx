@@ -1,8 +1,12 @@
+//  Header for all the post request
+
 export const config = {
   headers: {
     "Content-Type": "application/json",
   },
 };
+
+// Header for all the get request
 
 export const homeConfig = {
   headers: {

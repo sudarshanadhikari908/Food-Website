@@ -5,6 +5,7 @@ import Image from "next/image";
 function Category() {
   const data = useHomeStore((state) => state.homeData);
 
+  //  category consistes array of item of particular category
   const category = data?.data[1].categories;
 
   return (

@@ -1,5 +1,6 @@
 import api from "@/api/api";
 import { homeConfig } from "@/config/config";
+
 export const fetchSearchResult = async (type: string, keyword: string) => {
   try {
     const { data } = await api.get(
